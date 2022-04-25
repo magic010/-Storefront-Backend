@@ -3,11 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const orders_1 = require("../models/orders");
 const server_1 = __importDefault(require("../server"));
 const supertest_1 = __importDefault(require("supertest"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const order = new orders_1.OrdersModel();
 const request = (0, supertest_1.default)(server_1.default);
 const newUser = {
     firstName: 'first',
@@ -15,23 +13,6 @@ const newUser = {
     password: '12345678',
 };
 const token = jsonwebtoken_1.default.sign(newUser, process.env.TOKEN_SECRET);
-describe('Testing Orders Methods', () => {
-    it('A method that get all orders', () => {
-        expect(order.index).toBeDefined();
-    });
-    it('A method that get a specific order', () => {
-        expect(order.show).toBeDefined();
-    });
-    it('A method that create a new order', () => {
-        expect(order.create).toBeDefined();
-    });
-    it('A method that update data of an order', () => {
-        expect(order.update).toBeDefined();
-    });
-    it('A method that delete an order', () => {
-        expect(order.delete).toBeDefined();
-    });
-});
 describe('Testing orders Endpoints.', () => {
     it('GET /orders without a token', async () => {
         const response = await request.get('/orders');

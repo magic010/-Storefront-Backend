@@ -3,11 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const users_1 = require("../models/users");
 const server_1 = __importDefault(require("../server"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const supertest_1 = __importDefault(require("supertest"));
-const user = new users_1.UsersModel();
 const request = (0, supertest_1.default)(server_1.default);
 const newUser = {
     firstName: 'first',
@@ -15,22 +13,15 @@ const newUser = {
     password: '12345678',
 };
 const token = jsonwebtoken_1.default.sign(newUser, process.env.TOKEN_SECRET);
-describe('Testing User Methods', () => {
-    it('A method that get all users', () => {
-        expect(user.index).toBeDefined();
+// upload a new user before all tests
+beforeAll(async () => {
+    const response = await request.post('/user').send({
+        id: 1,
+        firstName: 'first',
+        lastName: 'last',
+        password: '12345678',
     });
-    it('A method that get a specific user', () => {
-        expect(user.show).toBeDefined();
-    });
-    it('A method that create a new user', () => {
-        expect(user.create).toBeDefined();
-    });
-    it('A method that update data of a user', () => {
-        expect(user.update).toBeDefined();
-    });
-    it('A method that delete a user', () => {
-        expect(user.delete).toBeDefined();
-    });
+    response.statusCode == 200 ? console.log('added user') : console.log('error');
 });
 describe('Testing Users Endpoints.', () => {
     it('GET /users without providing a token', async () => {

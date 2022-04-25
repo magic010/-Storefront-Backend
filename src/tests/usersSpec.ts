@@ -1,9 +1,6 @@
-import { UsersModel } from '../models/users';
 import app from '../server';
 import jwt from 'jsonwebtoken';
 import supertest from 'supertest';
-
-const user = new UsersModel();
 
 const request = supertest(app);
 
@@ -15,25 +12,17 @@ const newUser = {
 
 const token = jwt.sign(newUser, process.env.TOKEN_SECRET as string);
 
-describe('Testing User Methods', () => {
-  it('A method that get all users', () => {
-    expect(user.index).toBeDefined();
+// upload a new user before all tests
+beforeAll(async () => {
+  const response = await request.post('/user').send({
+    id: 1,
+    firstName: 'first',
+    lastName: 'last',
+    password: '12345678',
   });
-
-  it('A method that get a specific user', () => {
-    expect(user.show).toBeDefined();
-  });
-
-  it('A method that create a new user', () => {
-    expect(user.create).toBeDefined();
-  });
-  it('A method that update data of a user', () => {
-    expect(user.update).toBeDefined();
-  });
-  it('A method that delete a user', () => {
-    expect(user.delete).toBeDefined();
-  });
+  response.statusCode == 200 ? console.log('added user') : console.log('error');
 });
+
 describe('Testing Users Endpoints.', () => {
   it('GET /users without providing a token', async () => {
     const response = await request.get('/users');

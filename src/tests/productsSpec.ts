@@ -1,9 +1,6 @@
-import { ProductsModel } from '../models/products';
 import app from '../server';
 import supertest from 'supertest';
 import jwt from 'jsonwebtoken';
-
-const product = new ProductsModel();
 
 const request = supertest(app);
 
@@ -15,25 +12,6 @@ const newUser = {
 
 const token = jwt.sign(newUser, process.env.TOKEN_SECRET as string);
 
-describe('Testing Products Methods', () => {
-  it('A method that get all products', () => {
-    expect(product.index).toBeDefined();
-  });
-
-  it('A method that get a specific product', () => {
-    expect(product.show).toBeDefined();
-  });
-
-  it('A method that create a new product', () => {
-    expect(product.create).toBeDefined();
-  });
-  it('A method that update data of a product', () => {
-    expect(product.update).toBeDefined();
-  });
-  it('A method that delete a product', () => {
-    expect(product.delete).toBeDefined();
-  });
-});
 describe('Testing products Endpoints.', () => {
   it('GET /products', async () => {
     const response = await request.get('/products');

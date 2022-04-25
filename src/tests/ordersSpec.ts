@@ -1,9 +1,6 @@
-import { OrdersModel } from '../models/orders';
 import app from '../server';
 import supertest from 'supertest';
 import jwt from 'jsonwebtoken';
-
-const order = new OrdersModel();
 
 const request = supertest(app);
 
@@ -15,25 +12,6 @@ const newUser = {
 
 const token = jwt.sign(newUser, process.env.TOKEN_SECRET as string);
 
-describe('Testing Orders Methods', () => {
-  it('A method that get all orders', () => {
-    expect(order.index).toBeDefined();
-  });
-
-  it('A method that get a specific order', () => {
-    expect(order.show).toBeDefined();
-  });
-
-  it('A method that create a new order', () => {
-    expect(order.create).toBeDefined();
-  });
-  it('A method that update data of an order', () => {
-    expect(order.update).toBeDefined();
-  });
-  it('A method that delete an order', () => {
-    expect(order.delete).toBeDefined();
-  });
-});
 describe('Testing orders Endpoints.', () => {
   it('GET /orders without a token', async () => {
     const response = await request.get('/orders');
