@@ -15,7 +15,7 @@ app.use((0, helmet_1.default)());
 app.use(express_1.default.json());
 const port = process.env.PORT;
 app.get('/', async (_req, res) => {
-    res.send('Storefront backend APIs');
+    res.status(200).send('Storefront backend APIs');
 });
 (0, users_1.default)(app);
 (0, products_1.default)(app);

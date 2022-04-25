@@ -66,6 +66,7 @@ db-migrate reset
 # to connect with the database use the following environmental variables
   PORT ==> the server running on the port of your choice
   POSTGRES_HOST ==> the host of the database
+  POSTGRES_PORT ==> the port of the database default is 5432
   POSTGRES_DB ==> name of the database  
   POSTGRES_DB_TEST ==> name of the test database 
   POSTGRES_USER ==> the user name or the owner of the database

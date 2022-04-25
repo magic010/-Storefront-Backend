@@ -6,7 +6,7 @@ const products = new products_1.ProductsModel();
 const getAllProducts = async (req, res) => {
     try {
         const getProducts = await products.index();
-        res.send(getProducts);
+        res.status(200).send(getProducts);
     }
     catch (error) {
         res.status(500).json(error);
@@ -16,7 +16,7 @@ const getProduct = async (req, res) => {
     try {
         const id = Number(req.params.id);
         const product = await products.show(id);
-        res.send(product);
+        res.status(200).send(product);
     }
     catch (error) {
         res.status(500).json(error);
@@ -26,7 +26,7 @@ const createProduct = async (req, res) => {
     try {
         const { name, price } = req.body;
         const newProduct = await products.create(name, price);
-        res.send(newProduct);
+        res.status(200).send(newProduct);
     }
     catch (error) {
         res.status(500).json(error);
@@ -36,7 +36,7 @@ const updateProduct = async (req, res) => {
     try {
         const { id, name, price } = req.body;
         const updatedProduct = await products.update(id, name, price);
-        res.send(updatedProduct);
+        res.status(200).send(updatedProduct);
     }
     catch (error) {
         res.status(500).json(error);
@@ -46,7 +46,7 @@ const deleteProduct = async (req, res) => {
     try {
         const id = req.body.id;
         const deletedProduct = await products.delete(id);
-        res.send(deletedProduct);
+        res.status(200).send(deletedProduct);
     }
     catch (error) {
         res.status(500).json(error);

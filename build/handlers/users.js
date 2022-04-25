@@ -10,7 +10,7 @@ const users = new users_1.UsersModel();
 const getAllUsers = async (req, res) => {
     try {
         const getUsers = await users.index();
-        res.send(getUsers);
+        res.status(200).send(getUsers);
     }
     catch (error) {
         res.status(500).json(error);
@@ -20,7 +20,7 @@ const getUser = async (req, res) => {
     try {
         const id = Number(req.params.id);
         const user = await users.show(id);
-        res.send(user);
+        res.status(200).send(user);
     }
     catch (error) {
         res.status(500).json(error);
@@ -41,7 +41,7 @@ const updateUser = async (req, res) => {
     try {
         const { id, firstName, lastName, password } = req.body;
         const updatedUser = await users.update(id, firstName, lastName, password);
-        res.send(updatedUser);
+        res.status(200).send(updatedUser);
     }
     catch (error) {
         res.status(500).json(error);
@@ -51,7 +51,7 @@ const deleteUser = async (req, res) => {
     try {
         const id = req.body.id;
         const deletedUser = await users.delete(id);
-        res.send(deletedUser);
+        res.status(200).send(deletedUser);
     }
     catch (error) {
         res.status(500).json(error);
