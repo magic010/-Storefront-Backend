@@ -15,7 +15,6 @@ const token = jwt.sign(newUser, process.env.TOKEN_SECRET as string);
 // upload a new user before all tests
 beforeAll(async () => {
   const response = await request.post('/user').send({
-    id: 1,
     firstName: 'first',
     lastName: 'last',
     password: '12345678',
