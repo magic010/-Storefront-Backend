@@ -85,6 +85,14 @@ describe('Testing Users Endpoints.', () => {
     expect(response.status).toBe(401);
   });
 
+  it('fetch user by id', async () => {
+    const response = await request
+      .get('/user/1')
+      .set('Authorization', `Bearer ${token}`);
+    console.log(response.body);
+    expect(response.body.id).toBe(1);
+  });
+
   // it('DELETE /user with providing a token', async () => {
   //   const response = await request
   //     .delete('/user')
